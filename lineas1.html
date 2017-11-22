@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8">
+    <title>Lineas</title>
+    <script src="Chart.bundle.js"></script>
+    <script src="utils.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
+</head>
+
+<body>
+   <div style="width:100%;height: 100%;">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script>
+    var   str_data =  window.AppInventor.getWebViewString() ;
+    var   lab = str_data.split("|")[0].split(","); 
+    var   humid = str_data.split("|")[1].split(","); 
+    
+
+    var ctx = document.getElementById("canvas");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: lab,
+            datasets: [{
+                label: "Humidity",
+                backgroundColor: window.chartColors.blue,
+                borderColor: window.chartColors.blue,
+                    // data: [65, 59, 80, 81, 56, 55],
+                    data: humid,
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Humidity Line Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Day'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: '%'
+                        }
+                    }]
+                }
+            }
+        });
+// Juan Antonio Villalpando
+</script>
+</body>
+</html>
